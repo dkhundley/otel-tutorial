@@ -256,7 +256,7 @@ async def create_pizza_order(payload: PizzaOrderRequest):
         bake_pizza(order = pizza_order, bake_time = bake_time, tracer = tracer)
 
         # Setting a simple order ID
-        order_id = len(ORDERS) + 1
+        order_id = len(pizza_orders) + 1
 
         # Creating the order summary
         order_summary = {
