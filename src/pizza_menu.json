@@ -1,0 +1,22 @@
+{
+    "sizes": {
+        "small": 10.0,
+        "medium": 13.0,
+        "large": 16.0
+    },
+    "crusts": {
+        "thin": 0.0,
+        "hand-tossed": 1.0,
+        "deep-dish": 3.0
+    },
+    "toppings": {
+        "pepperoni": 1.5,
+        "sausage": 1.5,
+        "mushrooms": 1.0,
+        "onions": 0.75,
+        "green peppers": 0.75,
+        "black olives": 1.0,
+        "extra cheese": 1.5,
+        "pineapple": 1.25
+    }
+}
