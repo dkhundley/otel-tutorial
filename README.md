@@ -1,3 +1,4 @@
+![](assets/otel-github-banner.png)
 # OpenTelemetry Tutorial
 In this repo, we will provide a basic introduction to **OpenTelemetry**. OpenTelemetry, often referred to as **OTel** for short, is a standarized means of capturing **signals** from your application. We'll cover more in depth what signals means, but essentially, OTel provides a standard framework for recording a variety of different kinds of information about your running application.
 
