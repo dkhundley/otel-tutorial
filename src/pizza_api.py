@@ -125,7 +125,7 @@ async def lifespan(app: FastAPI):
 pizza_api = FastAPI(title = 'Pizza API', lifespan = lifespan)
 
 # Defining the middleware configuration
-@pizza_api.middleware('htto')
+@pizza_api.middleware('http')
 async def telemetry_middleware(request: Request, call_next):
 
     start = time.perf_counter()
