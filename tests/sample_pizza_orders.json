@@ -1,0 +1,62 @@
+[ 
+	{
+		"size": "small",
+		"crust": "thin",
+		"toppings": ["pepperoni"],
+		"quantity": 1
+	},
+	{
+		"size": "medium",
+		"crust": "hand-tossed",
+		"toppings": ["sausage", "mushrooms"],
+		"quantity": 2
+	},
+	{
+		"size": "large",
+		"crust": "deep-dish",
+		"toppings": ["pepperoni", "sausage", "extra cheese"],
+		"quantity": 1
+	},
+	{
+		"size": "small",
+		"crust": "hand-tossed",
+		"toppings": ["onions", "green peppers", "black olives"],
+		"quantity": 3
+	},
+	{
+		"size": "medium",
+		"crust": "thin",
+		"toppings": ["pineapple", "extra cheese"],
+		"quantity": 1
+	},
+	{
+		"size": "large",
+		"crust": "hand-tossed",
+		"toppings": ["pepperoni", "mushrooms", "onions"],
+		"quantity": 4
+	},
+	{
+		"size": "medium",
+		"crust": "deep-dish",
+		"toppings": [],
+		"quantity": 2
+	},
+	{
+		"size": "small",
+		"crust": "thin",
+		"toppings": ["black olives", "mushrooms", "onions", "green peppers"],
+		"quantity": 1
+	},
+	{
+		"size": "large",
+		"crust": "thin",
+		"toppings": ["extra cheese", "pepperoni", "sausage", "pineapple"],
+		"quantity": 2
+	},
+	{
+		"size": "medium",
+		"crust": "hand-tossed",
+		"toppings": ["pepperoni", "sausage", "mushrooms", "onions", "green peppers", "black olives", "extra cheese", "pineapple"],
+		"quantity": 1
+	}
+]

@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import any
 
 # Importing third party Python libraries
-from fastapi import FastAPI, HTTPException, Request
+from fastapi import FastAPI, Request
 from pydantic import BaseModel, Field
 from opentelemetry import metrics, trace
 
@@ -234,14 +234,6 @@ async def create_pizza_order(payload: PizzaOrderRequest):
         span.set_attribute(key = 'pizza.crust', value = pizza_order['crust'])
         span.set_attribute(key = 'pizza.quantity', value = pizza_order['quantity'])
         span.set_attribute(key = 'pizza.topping_count', value = len(pizza_order['toppings']))
-
-        # Validating the pizza order
-        try:
-            validate_order(order = pizza_order, menu = PIZZA_MENU, tracer = tracer)
-        except ValueError as exc:
-            span.record_exception(exc)
-            span.set_attribute(key = 'error', value = True)
-            raise HTTPException(status_code = 400, detail = str(exc)) from exc
         
         # Calculating the price per pizza and subtotal
         price_per_pizza, subtotal = calculate_price(order = pizza_order, menu = PIZZA_MENU, tracer = tracer)
