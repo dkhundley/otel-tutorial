@@ -111,7 +111,7 @@ fi
 	OTEL_EXPORTER_OTLP_TRACES_PROTOCOL="grpc" \
 	OTEL_EXPORTER_OTLP_LOGS_PROTOCOL="grpc" \
 	OTEL_SDK_DISABLED="$OTEL_DISABLED" \
-	"$PYTHON_CMD" -m uvicorn "$API_MODULE" --host 0.0.0.0 --port "$PORT"
+	exec "$PYTHON_CMD" -m uvicorn "$API_MODULE" --host 0.0.0.0 --port "$PORT"
 ) &
 API_PID=$!
 
