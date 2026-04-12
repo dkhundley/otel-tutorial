@@ -34,7 +34,7 @@ In the next few sections, we'll dive deeper into what this standardization looks
 ## What are we building?
 In this repo, we'll be building an API to **fulfill pizza orders**. Naturally, this is a fun, made-up example, so the data we'll use has been totally fabricated by me. (Well, me + AI, but who's asking?) This API will simulate the flow of a pizza from start to finish, including calculating the price of a pizza and simulating the prep / bake time.
 
-We'll be manifesting this API as a **Python-based FastAPI instance**, and we'll be serving this API out of a **Docker container**. The base code of the API is rather simple, although it may look complex because there is far more code representing the OpenTelemetry configuration than there is functional code itself! In reality, your own application will be far more complex and telemetry needs different, so don't hold the assumption that OTel code overwhelmingly bloats overall code. We're **intentionally** going a bit overboard with the OTel code for our pizza order API.
+We'll be manifesting this API as a **Python-based FastAPI instance**. The base code of the API is rather simple, although it may look complex because there is far more code representing the OpenTelemetry configuration than there is functional code itself! In reality, your own application will be far more complex and telemetry needs different, so don't hold the assumption that OTel code overwhelmingly bloats overall code. We're *intentionally* going a bit overboard with the OTel code for our pizza order API.
 
 
 
