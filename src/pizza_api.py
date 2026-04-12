@@ -5,7 +5,7 @@ import logging
 import time
 from contextlib import asynccontextmanager
 from pathlib import Path
-from typing import any
+from typing import Any
 
 # Importing third party Python libraries
 from fastapi import FastAPI, Request
@@ -21,7 +21,8 @@ from pizza_helpers import *
 ## DATA LOAD / DATA MODEL INSTANTIATION
 ## -------------------------------------------------------------------------------------------------
 # Loading the pizza menu
-PIZZA_MENU = json.loads('pizza_menu.json')
+with open('pizza_menu.json', 'r', encoding='utf-8') as menu_file:
+    PIZZA_MENU = json.load(menu_file)
 
 # Instantiating a list to hold the pizza orders
 pizza_orders = []

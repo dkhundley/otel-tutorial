@@ -22,7 +22,7 @@ As we ended the previous section, getting the telemetry where it needs to go can
 
 OTel was designed to provide that level of standardization to telemetry. It is an open source framework that manifests support in many different programming languages, including Python, which we'll be working with in this tutorial.
 
-In the next few sections, we'll dive deeper into what this standardization looks like. We'll also demonstrate this tangibly with Python code.
+In the next few sections, we'll dive deeper into what this standardization looks like. We'll also demonstrate this tangibly with Python code. Speaking of applying these concepts to something like our Python script, we refer to that as the process of **instrumenting** the code.
 
 
 
@@ -30,6 +30,8 @@ In the next few sections, we'll dive deeper into what this standardization looks
 In this repo, we'll be building an API to **fulfill pizza orders**. Naturally, this is a fun, made-up example, so the data we'll use has been totally fabricated by me. (Well, me + AI, but who's asking?) This API will simulate the flow of a pizza from start to finish, including calculating the price of a pizza and simulating the prep / bake time.
 
 We'll be manifesting this API as a **Python-based FastAPI instance**, and we'll be serving this API out of a **Docker container**. The base code of the API is rather simple, although it may look complex because there is far more code representing the OpenTelemetry configuration than there is functional code itself! In reality, your own application will be far more complex and telemetry needs different, so don't hold the assumption that OTel code overwhelmingly bloats overall code. We're **intentionally** going a bit overboard with the OTel code for our pizza order API.
+
+
 
 ## OTel Signals
 During our discussion on what telemetry is, we generally defined telemetry as the information you want to get from your software application. That data is collectively referred to as telemetry, and OTel breaks these down further into what are referred to as **signals**. As the name implies, each signal has a distinct purpose in what it is trying to signal to the person about the running application. Recall all the various ways in which we might be interested in collecting this information from the "What is telemetry?" section. OTel generally categorizes these examples into three different kinds of signals:
@@ -39,3 +41,14 @@ During our discussion on what telemetry is, we generally defined telemetry as th
 - **Metrics**: Pretty straightforward, metrics are numerical values that help you gain information about how your software application is performing. This could range from things like how many HTTP calls an API received to counting the number of pizza orders fulfilled. (As we will see with our own example!)
 
 (Note: If you look at OpenTelemetry's official documentation, it also seems to indicate a fourth signal type called **baggage**. I'm not sure if I'm reading the documentation correctly, so I could be misunderstanding here. As I understand it, baggage isn't a signal type like we think of the other signals. Rather, baggage is a key-value store that allows other parts of OTel to consistently represent telemetry in multiple contexts. It definitely sounds like it could be useful to support our other signals, but it doesn't seem to me like it's a signal in and of itself. Moreover, some might argue that in Python specifically, baggage is almost synonymous with a standard Python dictionary, so for our tutorial, we will not make use of baggage.)
+
+
+
+## OTel from Point A to Point B
+Recall back to the pure definition of what telemetry is: sending information to a *remote* location. In the case of OTel, when we *instrument* (aka, apply what telemetry we want to capture) something like a Python script, we may be running that Python script on one server and send the telemetry along to some other remote server, usually something that has a piece of software on it designed for managing telemetry. There are many options out there, including Data Dog and DynaTrace, and for our purposes, we will be using the **open source version of SigNoz**. We'll cover how you can easily set up SigNoz in a subsection below.
+
+Here are a few key concepts you should be familiar with as you think about how OTel sends your telemetry to a remote source:
+
+- **Exporter**: The exporter is the component in your app (or in a Collector) that sends telemetry out to a destination. You can think of it as the "delivery mechanism" for traces, logs, and metrics.
+- **Collector**: The OpenTelemetry Collector is an optional but very common middle layer between your app and your telemetry backend. It can receive telemetry, process/filter/batch it, and then forward it to one or more backends.
+- **gRPC**: gRPC is a high-performance remote procedure call protocol built on HTTP/2 and Protocol Buffers. In OTel, gRPC is commonly used by OTLP (the OpenTelemetry Protocol) to efficiently move telemetry data between services, applications, Collectors, and backends.
