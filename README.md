@@ -5,6 +5,12 @@ In this repo, we will provide a basic introduction to **OpenTelemetry**. OpenTel
 > [!NOTE]
 > This repo is still a work in progress. If you are looking for the code that we wrote during the [part 1 stream](https://www.youtube.com/live/lFdylLaIEsE?si=8ApArzuyYtsvQ0o1), please see the `stream` directory. I have a "cleaner" version of the code under `src`.
 
+## Accompanying Livestreams
+To support this repo, I did a two-part set of livecoding streams. Here are the links to each of those:
+
+- [Part 1 Stream](https://www.youtube.com/live/lFdylLaIEsE?si=8ApArzuyYtsvQ0o1): This stream covers an introduction to OpenTelemetry and instruments a fake pizza order taking API written in Python.
+- [Part 2 Stream](https://www.youtube.com/live/jZ3low6Sc1Y?si=qkeszC3_Np3SpzNk): This stream takes things a step further by talking about how our telemetry gets from point A (our Python API) to point B (a backend to store / make sense of our telemetry). We specifically demonstrate how to send this telemetry to the open source software SigNoz.
+
 
 ## What is telemetry?
 The definition of **telemetry** as Wikipedia notes is the following: *telemetry is the in situ collection of measurements or other data at remote points and their automatic transmission to receiving equipment for monitoring. The word is derived from the Greek roots tele, 'far off', and metron, 'measure'.* That's not a bad definition, but it can be a bit confusing, so let's ground this definition another.
@@ -47,8 +53,17 @@ During our discussion on what telemetry is, we generally defined telemetry as th
 ## OTel from Point A to Point B
 Recall back to the pure definition of what telemetry is: sending information to a *remote* location. In the case of OTel, when we *instrument* (aka, apply what telemetry we want to capture) something like a Python script, we may be running that Python script on one server and send the telemetry along to some other remote server, usually something that has a piece of software on it designed for managing telemetry. There are many options out there, including Data Dog and DynaTrace, and for our purposes, we will be using the **open source version of SigNoz**. We'll cover how you can easily set up SigNoz in a subsection below.
 
-Here are a few key concepts you should be familiar with as you think about how OTel sends your telemetry to a remote source:
+When it comes to understanding how your telemetry is sent from your application, it is important to understand it in these 3 layers:
 
-- **Exporter**: The exporter is the component in your app (or in a Collector) that sends telemetry out to a destination. You can think of it as the "delivery mechanism" for traces, logs, and metrics.
-- **Collector**: The OpenTelemetry Collector is an optional but very common middle layer between your app and your telemetry backend. It can receive telemetry, process/filter/batch it, and then forward it to one or more backends.
-- **gRPC**: gRPC is a high-performance remote procedure call protocol built on HTTP/2 and Protocol Buffers. In OTel, gRPC is commonly used by OTLP (the OpenTelemetry Protocol) to efficiently move telemetry data between services, applications, Collectors, and backends.
+- **Instrumentation**: This is what we're applying to something like our Python API to capture the traces, logs, and metrics. We package up this instrumentation with an **exporter**, which is represented by the Python OTel SDK in our case.
+- **Collector**: This is a "middleware" layer that sits between your application and the telemetry backend. Given that we are using SigNoz, SigNoz will serve as both the collector and the final backend, but OpenTelemetry natively is set up in such a way that this collector can be its own entity entirely.
+- **Backend**: We can make sense of our telemetry using some sort of backend software tool. In our case, we will be using SigNoz, which per the point above, SigNoz will serve a dual purpose by being both the collector and the backend.
+
+
+
+### SigNoz Setup
+In this project, we will be using the open source software **SigNoz** as the backend to store and make use of our telemetry. Using Docker, SigNoz provides a very simple manner with setting up a simple SigNoz local instance. For context, I personally will be using my own Mac mini to host the SigNoz instance, and I will run the Python API itself on my own MacBook Pro. By doing this, I can demonstrate effectively that one server (my MacBook Pro) can effectively send telemetry to another server (my Mac Mini).
+
+1. Clone SigNoz's repo: `git clone https://github.com/SigNoz/signoz.git`
+2. Change to the appropriate directory: `cd signoz/deploy/docker`
+3. Run `docker compose up -d`
