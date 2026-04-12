@@ -59,6 +59,8 @@ When it comes to understanding how your telemetry is sent from your application,
 - **Collector**: This is a "middleware" layer that sits between your application and the telemetry backend. Given that we are using SigNoz, SigNoz will serve as both the collector and the final backend, but OpenTelemetry natively is set up in such a way that this collector can be its own entity entirely.
 - **Backend**: We can make sense of our telemetry using some sort of backend software tool. In our case, we will be using SigNoz, which per the point above, SigNoz will serve a dual purpose by being both the collector and the backend.
 
+Something else to be aware of is that there are generally two transfer protocols that people use to send their telemetry from their application to a collector. These transfer protocols include **gRPC** and **http**. We won't cover these too in depth for our tutorial here, but please be aware that in our specific case, we will be using gRPC. There's not necessarily a right or wrong answer here on which to choose as each comes with its pros and cons. Generally speaking, the pro of using gRPC is that it is faster, but the con is that it can be harder to debug. From my understanding, it is more ideal to go with gRPC if you can.
+
 
 
 ### SigNoz Setup
